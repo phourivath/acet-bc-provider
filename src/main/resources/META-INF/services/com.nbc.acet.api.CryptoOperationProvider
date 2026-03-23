@@ -2,3 +2,4 @@ com.nbc.acet.provider.bc.BcRsa2048Provider
 com.nbc.acet.provider.bc.BcEcdsaP256Provider
 com.nbc.acet.provider.bc.BcMlDsa65Provider
 com.nbc.acet.provider.bc.BcMlKem768Provider
+com.nbc.acet.provider.bc.BcSlhDsaSha2192SProvider
