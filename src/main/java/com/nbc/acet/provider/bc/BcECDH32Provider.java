@@ -2,8 +2,6 @@ package com.nbc.acet.provider.bc;
 
 import java.security.spec.AlgorithmParameterSpec;
 
-import org.bouncycastle.jce.ECNamedCurveTable;
-
 import com.nbc.acet.api.Algorithm;
 import com.nbc.acet.api.ParameterSet;
 import com.nbc.acet.provider.bc.base.BcKeyAgreementProviderBase;
@@ -17,21 +15,21 @@ public class BcECDH32Provider extends BcKeyAgreementProviderBase {
 
     @Override
     public ParameterSet parameterSet() {
-        return ParameterSet.ECDH_P256;
+        return ParameterSet.X25519;
     }
 
     @Override
     protected String keyAlgorithm() {
-        return "EC";
+        return "X25519";
     }
 
     @Override
     protected String agreementAlgorithm() {
-        return "ECDH";
+        return "X25519";
     }
 
     @Override
     protected AlgorithmParameterSpec keySpec() {
-        return ECNamedCurveTable.getParameterSpec("P-256");
+        return null;
     }
 }
