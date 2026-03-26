@@ -1,5 +1,7 @@
-com.nbc.acet.provider.bc.BcRsa2048Provider
-com.nbc.acet.provider.bc.BcEcdsaP256Provider
-com.nbc.acet.provider.bc.BcMlDsa65Provider
-com.nbc.acet.provider.bc.BcMlKem768Provider
-com.nbc.acet.provider.bc.BcSlhDsaSha2192SProvider
+com.nbc.acet.provider.bc.BcECDH32Provider
+com.nbc.acet.provider.bc.BcECDSA32Provider
+com.nbc.acet.provider.bc.BcMLDSA65Provider
+com.nbc.acet.provider.bc.BcMLKEM768Provider
+com.nbc.acet.provider.bc.BcRSA256Provider
+com.nbc.acet.provider.bc.BcSLHDSASHA2192SProvider
+com.nbc.acet.provider.bc.BcX25519MLKEM768Provider
