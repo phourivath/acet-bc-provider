@@ -33,7 +33,7 @@ public abstract class BcKeyAgreementProviderBase implements CryptoOperationProvi
 
     @Override
     public String provider() {
-        return "BouncyCastle-1.83";
+        return "BouncyCastle-1.84";
     }
 
     @Override
