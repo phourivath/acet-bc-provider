@@ -16,10 +16,10 @@ import org.bouncycastle.jcajce.spec.KEMExtractSpec;
 import org.bouncycastle.jcajce.spec.KEMGenerateSpec;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
-import com.nbc.acet.api.AlgorithmFamily;
-import com.nbc.acet.api.CryptoOperationProvider;
+import com.nbc.acet.api.CryptoOperationProvider.EncapsulationResult;
+import com.nbc.acet.api.CryptoOperationProvider.KeyPairResult;
 
-public abstract class BcKemProviderBase implements CryptoOperationProvider {
+public abstract class BcKemProviderBase {
 
     static {
         if (Security.getProvider("BC") == null) {
@@ -31,17 +31,10 @@ public abstract class BcKemProviderBase implements CryptoOperationProvider {
 
     protected abstract AlgorithmParameterSpec kemSpec();
 
-    @Override
     public String provider() {
         return "BouncyCastle-1.84";
     }
 
-    @Override
-    public AlgorithmFamily algorithmFamily() {
-        return AlgorithmFamily.KEM;
-    }
-
-    @Override
     public KeyPairResult generateKeyPair() throws Exception {
         KeyPairGenerator kpg = KeyPairGenerator.getInstance(kemAlgorithm(), "BC");
         
@@ -58,7 +51,6 @@ public abstract class BcKemProviderBase implements CryptoOperationProvider {
                 kp.getPrivate().getEncoded());
     }
 
-    @Override
     public EncapsulationResult encapsulate(byte[] publicKey) throws Exception {
         java.security.PublicKey pub = KeyFactory.getInstance(kemAlgorithm(), "BC")
                 .generatePublic(new X509EncodedKeySpec(publicKey));
@@ -74,7 +66,6 @@ public abstract class BcKemProviderBase implements CryptoOperationProvider {
                 encapsulated.getEncapsulation());
     }
 
-    @Override
     public byte[] decapsulate(byte[] encapsulation, byte[] privateKey) throws Exception {
         java.security.PrivateKey priv = KeyFactory.getInstance(kemAlgorithm(), "BC")
                 .generatePrivate(new PKCS8EncodedKeySpec(privateKey));

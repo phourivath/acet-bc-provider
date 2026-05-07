@@ -4,20 +4,15 @@ import java.security.spec.AlgorithmParameterSpec;
 
 import org.bouncycastle.jcajce.spec.MLDSAParameterSpec;
 
-import com.nbc.acet.api.Algorithm;
-import com.nbc.acet.api.ParameterSet;
+import com.nbc.acet.api.MlDsaParameterSet;
+import com.nbc.acet.api.MlDsaProvider;
 import com.nbc.acet.provider.bc.base.BcSignatureProviderBase;
 
-public class BcMLDSA65Provider extends BcSignatureProviderBase {
+public class BcMLDSA65Provider extends BcSignatureProviderBase implements MlDsaProvider {
 
     @Override
-    public Algorithm algorithm() {
-        return Algorithm.ML_DSA;
-    }
-
-    @Override
-    public ParameterSet parameterSet() {
-        return ParameterSet.ML_DSA_65;
+    public MlDsaParameterSet parameterSet() {
+        return MlDsaParameterSet.ML_DSA_65;
     }
 
     @Override

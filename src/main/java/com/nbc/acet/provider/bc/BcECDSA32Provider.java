@@ -4,20 +4,15 @@ import java.security.spec.AlgorithmParameterSpec;
 
 import org.bouncycastle.jce.ECNamedCurveTable;
 
-import com.nbc.acet.api.Algorithm;
-import com.nbc.acet.api.ParameterSet;
+import com.nbc.acet.api.EcdsaParameterSet;
+import com.nbc.acet.api.EcdsaProvider;
 import com.nbc.acet.provider.bc.base.BcSignatureProviderBase;
 
-public class BcECDSA32Provider extends BcSignatureProviderBase {
+public class BcECDSA32Provider extends BcSignatureProviderBase implements EcdsaProvider {
 
     @Override
-    public Algorithm algorithm() {
-        return Algorithm.ECDSA;
-    }
-
-    @Override
-    public ParameterSet parameterSet() {
-        return ParameterSet.ECDSA_P256;
+    public EcdsaParameterSet parameterSet() {
+        return EcdsaParameterSet.ECDSA_P256;
     }
 
     @Override

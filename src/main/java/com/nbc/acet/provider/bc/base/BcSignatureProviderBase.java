@@ -15,10 +15,9 @@ import java.security.spec.X509EncodedKeySpec;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.jcajce.spec.ContextParameterSpec;
 
-import com.nbc.acet.api.AlgorithmFamily;
-import com.nbc.acet.api.CryptoOperationProvider;
+import com.nbc.acet.api.CryptoOperationProvider.KeyPairResult;
 
-public abstract class BcSignatureProviderBase implements CryptoOperationProvider {
+public abstract class BcSignatureProviderBase {
 
     static {
         if (Security.getProvider("BC") == null) {
@@ -36,17 +35,10 @@ public abstract class BcSignatureProviderBase implements CryptoOperationProvider
         return false;
     }
 
-    @Override
     public String provider() {
         return "BouncyCastle-1.84";
     }
 
-    @Override
-    public AlgorithmFamily algorithmFamily() {
-        return AlgorithmFamily.SIGNATURE;
-    }
-
-    @Override
     public KeyPairResult generateKeyPair() throws Exception {
         KeyPairGenerator kpg = KeyPairGenerator.getInstance(keyAlgorithm(), "BC");
         kpg.initialize(keySpec());
@@ -56,7 +48,6 @@ public abstract class BcSignatureProviderBase implements CryptoOperationProvider
                 kp.getPrivate().getEncoded());
     }
 
-    @Override
     public byte[] sign(byte[] message, byte[] privateKey) throws Exception {
         PrivateKey pk = KeyFactory.getInstance(keyAlgorithm(), "BC")
                 .generatePrivate(new PKCS8EncodedKeySpec(privateKey));
@@ -66,7 +57,6 @@ public abstract class BcSignatureProviderBase implements CryptoOperationProvider
         return sig.sign();
     }
 
-    @Override
     public byte[] sign(byte[] message, byte[] privateKey, byte[] context) throws Exception {
         if ((context == null || context.length == 0) && !signatureSupportsContext()) {
             return sign(message, privateKey);
@@ -87,7 +77,6 @@ public abstract class BcSignatureProviderBase implements CryptoOperationProvider
         return sig.sign();
     }
 
-    @Override
     public boolean verify(byte[] message, byte[] signature,
             byte[] publicKey) throws Exception {
         PublicKey pk = KeyFactory.getInstance(keyAlgorithm(), "BC")
@@ -102,7 +91,6 @@ public abstract class BcSignatureProviderBase implements CryptoOperationProvider
         }
     }
 
-    @Override
     public boolean verify(byte[] message, byte[] signature,
             byte[] publicKey, byte[] context) throws Exception {
         if ((context == null || context.length == 0) && !signatureSupportsContext()) {
@@ -128,7 +116,6 @@ public abstract class BcSignatureProviderBase implements CryptoOperationProvider
         }
     }
 
-    @Override
     public boolean supportsContext() {
         return signatureSupportsContext();
     }

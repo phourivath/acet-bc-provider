@@ -2,20 +2,15 @@ package com.nbc.acet.provider.bc;
 
 import java.security.spec.AlgorithmParameterSpec;
 
-import com.nbc.acet.api.Algorithm;
-import com.nbc.acet.api.ParameterSet;
+import com.nbc.acet.api.X25519MlKemParameterSet;
+import com.nbc.acet.api.X25519MlKemProvider;
 import com.nbc.acet.provider.bc.base.BcKemProviderBase;
 
-public class BcX25519MLKEM768Provider extends BcKemProviderBase {
+public class BcX25519MLKEM768Provider extends BcKemProviderBase implements X25519MlKemProvider {
 
     @Override
-    public Algorithm algorithm() {
-        return Algorithm.X25519_ML_KEM;
-    }
-
-    @Override
-    public ParameterSet parameterSet() {
-        return ParameterSet.X25519MLKEM768;
+    public X25519MlKemParameterSet parameterSet() {
+        return X25519MlKemParameterSet.X25519MLKEM768;
     }
 
     @Override

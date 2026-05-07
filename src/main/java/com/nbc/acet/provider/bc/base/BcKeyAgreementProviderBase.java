@@ -14,10 +14,9 @@ import javax.crypto.KeyAgreement;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
-import com.nbc.acet.api.AlgorithmFamily;
-import com.nbc.acet.api.CryptoOperationProvider;
+import com.nbc.acet.api.CryptoOperationProvider.KeyPairResult;
 
-public abstract class BcKeyAgreementProviderBase implements CryptoOperationProvider {
+public abstract class BcKeyAgreementProviderBase {
 
     static {
         if (Security.getProvider("BC") == null) {
@@ -31,17 +30,10 @@ public abstract class BcKeyAgreementProviderBase implements CryptoOperationProvi
 
     protected abstract AlgorithmParameterSpec keySpec();
 
-    @Override
     public String provider() {
         return "BouncyCastle-1.84";
     }
 
-    @Override
-    public AlgorithmFamily algorithmFamily() {
-        return AlgorithmFamily.KEY_AGREEMENT;
-    }
-
-    @Override
     public KeyPairResult generateKeyPair() throws Exception {
         KeyPairGenerator kpg = KeyPairGenerator.getInstance(keyAlgorithm(), "BC");
         AlgorithmParameterSpec spec = keySpec();
@@ -54,7 +46,6 @@ public abstract class BcKeyAgreementProviderBase implements CryptoOperationProvi
                 kp.getPrivate().getEncoded());
     }
 
-    @Override
     public byte[] agree(byte[] myPrivateKey, byte[] theirPublicKey) throws Exception {
         KeyFactory kf = KeyFactory.getInstance(keyAlgorithm(), "BC");
         PrivateKey priv = kf.generatePrivate(new PKCS8EncodedKeySpec(myPrivateKey));
